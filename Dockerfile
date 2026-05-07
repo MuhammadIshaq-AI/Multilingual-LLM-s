@@ -3,7 +3,7 @@ FROM node:20-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY apps/web/package.json apps/web/package-lock.json ./apps/web/
-RUN cd apps/web && npm ci --only=production
+RUN cd apps/web && npm ci
 
 # Stage 2: Builder
 FROM node:20-alpine AS builder

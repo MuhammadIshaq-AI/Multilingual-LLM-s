@@ -1,45 +1,93 @@
-# nvidia-llm-models
+# Multi-langual SAAS 🚀
 
-This repo contains a **SaaS-ready Next.js app** that provides:
+A professional, SaaS-ready workspace for building and experimenting with **NVIDIA NIM** models. This repository provides a high-performance Next.js application integrated with multimodal chat and image generation capabilities.
 
-- **Chatbot** (with optional image upload for vision-capable models)
-- **Image generation** from a text prompt
-- **Per-IP rate limiting** on all AI endpoints
+---
 
-## Quickstart (web app)
+© 2026 AI Cortexo.
 
-1) Set env vars (recommended: `apps/web/.env.local`):
+## ✨ Features
 
-- `NVAPI_KEY=...`
-- `HF_TOKEN=...`
-- `NVIDIA_TEXT_BASE_URL=https://integrate.api.nvidia.com/v1` (optional)
-- `NVIDIA_TEXT_MODEL=google/gemma-3n-e4b-it` (optional)
-- `HF_IMAGE_MODEL=Qwen/Qwen-Image` (optional)
-- (Optional prod rate limit) `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`
+- 🤖 **Advanced Chatbot**: Support for multimodal interactions (text + vision) using NVIDIA NIM endpoints.
+- 🎨 **Image Generation**: High-quality image synthesis from text prompts via Hugging Face & fal-ai.
+- 🛡️ **SaaS Infrastructure**:
+  - **Server-side API Protection**: Your NVIDIA and Hugging Face keys never touch the client.
+  - **Smart Rate Limiting**: Per-IP rate limiting (Upstash Redis for production, in-memory for dev).
+- 💎 **Premium UI**: Streamlined, glassmorphic design built with Tailwind CSS and Lucide icons.
+- 🐳 **Docker Ready**: Optimized multi-stage Dockerfile for instant deployment on AWS EC2 or other cloud providers.
 
-Image generation uses Hugging Face Inference with provider `fal-ai` and model `Qwen/Qwen-Image`.
+---
 
-2) Run:
+## 🛠️ Project Structure
+
+- `apps/web`: The main Next.js 15+ application (Chat & Image Studios).
+- `scripts`: Utility scripts for model experimentation.
+- `notebooks`: Jupyter notebooks for advanced LLM fine-tuning and testing.
+
+---
+
+## 🚀 Quickstart
+
+### 1. Environment Configuration
+
+Create a file at `apps/web/.env.local` and add your keys:
+
+```env
+NVAPI_KEY=your_nvidia_api_key
+HF_TOKEN=your_huggingface_token
+
+# Optional Configurations
+NVIDIA_TEXT_MODEL=google/gemma-3n-e4b-it
+HF_IMAGE_MODEL=Qwen/Qwen-Image
+
+# Production Rate Limiting (Upstash Redis)
+UPSTASH_REDIS_REST_URL=your_redis_url
+UPSTASH_REDIS_REST_TOKEN=your_redis_token
+```
+
+### 2. Local Development
 
 ```bash
 cd apps/web
-npm i
+npm install
 npm run dev
 ```
 
-Then open:
+Visit:
+- `http://localhost:3005` (Landing Page)
+- `/app/chat` (Chat Studio)
+- `/app/images` (Image Generation)
 
-- `/` (landing)
-- `/app/chat`
-- `/app/images`
+---
 
-## Rate limiting
+## 🚢 Deployment
 
-- Default limits:
-  - **Chat**: 20 requests / minute / IP
-  - **Images**: 5 requests / minute / IP
-- If Upstash env vars are present, rate limiting is backed by Redis. Otherwise it falls back to an in-memory limiter (dev only).
+### Using Docker (Recommended for AWS EC2)
 
-## Python examples
+The repository includes an optimized `Dockerfile` at the root.
 
-The old CLI chat script lives in `examples/python/cli_chat.py`. It’s intended for local experimentation, while the “product” is the Next.js app under `apps/web`.
+**1. Build the Image**
+```bash
+docker build -t nvidia-llm-studio .
+```
+
+**2. Run the Container**
+```bash
+docker run -d -p 80:3000 \
+  -e NVAPI_KEY=your_key_here \
+  -e HF_TOKEN=your_token_here \
+  --name studio nvidia-llm-studio
+```
+
+---
+
+## 🛡️ Security & Performance
+
+- **Rate Limiting**: 
+  - Chat: 20 requests / minute / IP.
+  - Images: 5 requests / minute / IP.
+- **Standalone Build**: The Docker build uses Next.js `standalone` mode, significantly reducing image size and improving startup time.
+- **API Security**: All AI processing is handled via Next.js Route Handlers (Server-side) to ensure API keys are never exposed in the browser.
+
+---
+

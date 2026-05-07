@@ -9,170 +9,232 @@ import {
   Sparkles,
   WandSparkles,
   Zap,
+  LayoutDashboard,
+  Cpu,
+  Globe,
+  ArrowUpRight,
 } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="relative flex min-h-full flex-col overflow-hidden">
-      <div className="studio-grid pointer-events-none absolute inset-x-0 top-0 h-[620px]" />
+    <div className="relative flex min-h-screen flex-col overflow-hidden selection:bg-primary/30">
+      {/* Background Decor */}
+      <div className="studio-grid pointer-events-none absolute inset-x-0 top-0 h-[600px]" />
+      <div className="pointer-events-none absolute -top-24 -left-24 size-80 rounded-full bg-primary/5 blur-[100px]" />
 
-      <header className="relative z-10 border-b border-white/10 bg-background/55 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6">
-          <div className="inline-flex items-center gap-3">
-            <span className="flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground shadow-[0_0_32px_rgba(93,255,171,0.32)]">
-              <Sparkles className="size-5" />
-            </span>
-            <span>
-              <span className="block text-sm font-semibold tracking-tight">NVIDIA LLM Studio</span>
-              <span className="block text-[0.7rem] text-muted-foreground">Private model workspace</span>
-            </span>
-          </div>
-          <div className="flex gap-2">
-            <Link
-              href="/app/chat"
-              className="inline-flex h-9 items-center justify-center gap-1.5 rounded-md border border-white/10 bg-white/[0.055] px-3 text-[0.8rem] font-medium text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground"
-            >
-              <MessageSquareText className="size-4" />
-              Chat
+      <header className="sticky top-0 z-50 border-b border-white/5 bg-background/60 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+            <Link href="/" className="group flex items-center gap-2.5">
+              <div className="relative flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-transform group-hover:scale-105">
+                <Sparkles className="size-5" />
+              </div>
+              <span className="text-sm font-bold tracking-tight text-white">AI Cortexo</span>
+            </Link>
+
+          <nav className="hidden items-center gap-8 md:flex">
+            {["Models", "API", "Docs"].map((item) => (
+              <Link key={item} href="#" className="text-[0.8rem] font-medium text-muted-foreground transition-colors hover:text-white">
+                {item}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <Link href="/app/chat" className="text-[0.8rem] font-medium text-muted-foreground hover:text-white transition-colors px-3">
+              Sign In
             </Link>
             <Link
               href="/app/images"
-              className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-3 text-[0.8rem] font-semibold text-primary-foreground shadow-[0_0_28px_rgba(93,255,171,0.22)] transition-colors hover:bg-primary/90"
+              className="inline-flex h-8 items-center justify-center rounded-full bg-white px-4 text-[0.8rem] font-bold text-black transition-all hover:bg-zinc-200 active:scale-95"
             >
-              Launch <ArrowRight className="ml-1.5 size-4" />
+              Get Started
             </Link>
           </div>
         </div>
       </header>
 
-      <main className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col gap-8 px-5 py-8 sm:px-6 lg:py-12">
-        <section className="grid min-h-[calc(100vh-132px)] items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="space-y-7">
-            <div className="inline-flex items-center gap-2 rounded-md border border-primary/25 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary shadow-[0_0_30px_rgba(93,255,171,0.12)]">
-              <ShieldCheck className="size-3.5" />
-              Server-side NVIDIA API calls
+      <main className="relative z-10 flex-1">
+        {/* Hero & Product Section */}
+        <section className="mx-auto max-w-7xl px-6 pt-12 pb-24">
+          <div className="flex flex-col items-center text-center space-y-6 mb-16">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[0.7rem] font-bold text-primary backdrop-blur-sm">
+              <Zap className="size-3 fill-current" />
+              v1.0 is now live
             </div>
-
-            <div className="space-y-4">
-              <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-7xl">
-                A beautiful command center for AI chat and images.
-              </h1>
-              <p className="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-                Run multimodal chat, generate images, and keep your NVIDIA API key protected behind Next.js routes.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <h1 className="text-gradient text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl max-w-3xl">
+              Build AI apps at the speed of thought.
+            </h1>
+            <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
+              A high-performance workspace for NVIDIA NIM. 
+              Secure, lightning-fast, and developer-first.
+            </p>
+            <div className="flex items-center gap-4">
               <Link
                 href="/app/chat"
-                className="inline-flex h-11 items-center justify-center rounded-md bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-[0_0_34px_rgba(93,255,171,0.24)] transition-colors hover:bg-primary/90"
+                className="inline-flex h-11 items-center justify-center rounded-lg bg-primary px-6 text-sm font-bold text-primary-foreground shadow-[0_10px_30px_rgba(93,255,171,0.2)] transition-all hover:-translate-y-0.5 active:scale-95"
               >
-                Start chatting <ArrowRight className="ml-2 size-4" />
+                Launch Studio
               </Link>
               <Link
                 href="/app/images"
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-md border border-white/10 bg-white/[0.055] px-5 text-sm font-medium text-foreground transition-colors hover:bg-white/10"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 px-6 text-sm font-semibold text-white backdrop-blur-md transition-all hover:bg-white/10 active:scale-95"
               >
-                <WandSparkles className="size-4 text-primary" />
-                Create images
+                Documentation
               </Link>
-            </div>
-
-            <div className="grid max-w-2xl gap-3 pt-2 sm:grid-cols-3">
-              {[
-                ["Private", "Server key handling", LockKeyhole],
-                ["Fast", "Streaming responses", Zap],
-                ["Creative", "Image generation", ImageIcon],
-              ].map(([title, label, Icon]) => (
-                <div key={title as string} className="rounded-md border border-white/10 bg-white/[0.045] p-3">
-                  <Icon className="mb-3 size-4 text-primary" />
-                  <div className="text-sm font-medium">{title as string}</div>
-                  <div className="mt-1 text-xs text-muted-foreground">{label as string}</div>
-                </div>
-              ))}
             </div>
           </div>
 
-          <div className="studio-panel rounded-lg p-3">
-            <div className="overflow-hidden rounded-md border border-white/10 bg-[#071117]">
-              <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-                <div className="flex items-center gap-2">
-                  <span className="size-2 rounded-full bg-primary shadow-[0_0_18px_rgba(93,255,171,0.75)]" />
-                  <span className="text-sm font-medium">Live model console</span>
+          <div className="relative mx-auto max-w-5xl">
+            <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-b from-primary/20 to-transparent blur-xl opacity-50" />
+            <div className="studio-panel relative overflow-hidden rounded-xl border border-white/10 bg-[#071117]/90 shadow-2xl backdrop-blur-2xl">
+              <div className="flex items-center justify-between border-b border-white/5 bg-white/5 px-4 py-2">
+                <div className="flex items-center gap-1.5">
+                  <div className="size-2 rounded-full bg-white/10" />
+                  <div className="size-2 rounded-full bg-white/10" />
+                  <div className="size-2 rounded-full bg-white/10" />
                 </div>
-                <div className="rounded-md border border-white/10 bg-white/[0.055] px-2 py-1 text-[0.7rem] text-muted-foreground">
-                  qwen-image
+                <div className="text-[0.6rem] font-medium text-white/30 uppercase tracking-widest">
+                  Live Preview
                 </div>
+                <div className="size-2" />
               </div>
-
-              <div className="grid gap-0 lg:grid-cols-[1fr_230px]">
-                <div className="space-y-4 p-4 sm:p-5">
-                  <div className="rounded-md border border-white/10 bg-white/[0.045] p-4">
-                    <div className="mb-4 flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                      <MessageSquareText className="size-4 text-primary" />
-                      Conversation
+              
+              <div className="grid lg:grid-cols-[1fr_240px] divide-x divide-white/5">
+                <div className="p-6 space-y-6">
+                  <div className="flex gap-4">
+                    <div className="size-8 shrink-0 rounded-lg bg-zinc-800 flex items-center justify-center">
+                      <BrainCircuit className="size-4 text-zinc-400" />
                     </div>
-                    <div className="space-y-3">
-                      <div className="max-w-[82%] rounded-md border border-white/10 bg-white/[0.06] px-3 py-2 text-sm leading-6 text-muted-foreground">
-                        Turn this product sketch into a sharper visual concept.
-                      </div>
-                      <div className="ml-auto max-w-[88%] rounded-md bg-primary px-3 py-2 text-sm leading-6 text-primary-foreground">
-                        I will refine the layout, lighting, materials, and composition while keeping the original concept intact.
-                      </div>
+                    <div className="space-y-1.5">
+                      <div className="text-[0.65rem] font-bold text-zinc-500 uppercase tracking-wider">Prompt</div>
+                      <div className="text-sm text-zinc-300">Refactor this React component for performance.</div>
                     </div>
                   </div>
-
-                  <div className="grid grid-cols-3 gap-3">
-                    <div className="aspect-square rounded-md border border-white/10 bg-[linear-gradient(135deg,#5DFFAB,#38BDF8_58%,#111827)] p-2">
-                      <div className="h-full rounded border border-white/25 bg-black/20" />
+                  <div className="flex gap-4">
+                    <div className="size-8 shrink-0 rounded-lg bg-primary flex items-center justify-center">
+                      <Sparkles className="size-4 text-primary-foreground" />
                     </div>
-                    <div className="aspect-square rounded-md border border-white/10 bg-[linear-gradient(135deg,#FACC15,#10B981_54%,#164E63)] p-2">
-                      <div className="h-full rounded border border-white/25 bg-black/20" />
-                    </div>
-                    <div className="aspect-square rounded-md border border-white/10 bg-[linear-gradient(135deg,#A78BFA,#22C55E_58%,#020617)] p-2">
-                      <div className="h-full rounded border border-white/25 bg-black/20" />
-                    </div>
-                  </div>
-
-                  <div className="rounded-md border border-white/10 bg-white/[0.045] p-3">
-                    <div className="mb-2 text-xs text-muted-foreground">Prompt composer</div>
-                    <div className="flex items-center gap-2 rounded-md border border-white/10 bg-black/20 px-3 py-2 text-sm text-muted-foreground">
-                      Add cinematic lighting and clean product details...
-                      <span className="ml-auto rounded bg-primary px-2 py-1 text-xs font-semibold text-primary-foreground">
-                        Send
-                      </span>
+                    <div className="space-y-1.5">
+                      <div className="text-[0.65rem] font-bold text-primary uppercase tracking-wider">Assistant</div>
+                      <div className="text-sm text-zinc-300 leading-relaxed">
+                        I've analyzed your component. Implementing <code className="text-primary">useMemo</code> and <code className="text-primary">useCallback</code> will reduce unnecessary re-renders by 40%...
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                <aside className="border-t border-white/10 bg-white/[0.035] p-4 lg:border-l lg:border-t-0">
-                  <div className="mb-4 flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                    <BrainCircuit className="size-4 text-primary" />
-                    Session stats
-                  </div>
-                  <div className="space-y-3">
-                    {[
-                      ["Latency", "1.2s", "w-[72%]"],
-                      ["Context", "8k", "w-[56%]"],
-                      ["Creativity", "0.7", "w-[84%]"],
-                    ].map(([label, value, width]) => (
-                      <div key={label as string}>
-                        <div className="mb-1 flex justify-between text-xs">
-                          <span className="text-muted-foreground">{label as string}</span>
-                          <span>{value as string}</span>
+                
+                <div className="hidden lg:block p-6 bg-white/[0.01]">
+                  <div className="space-y-6">
+                    <div>
+                      <div className="text-[0.6rem] font-bold text-zinc-500 uppercase tracking-widest mb-3">Model Stats</div>
+                      <div className="space-y-3">
+                        {[
+                          ["Latency", "42ms", "w-[85%]"],
+                          ["Throughput", "120 t/s", "w-[60%]"],
+                        ].map(([k, v, w]) => (
+                          <div key={k}>
+                            <div className="flex justify-between text-[0.65rem] mb-1.5">
+                              <span className="text-zinc-500">{k}</span>
+                              <span className="text-zinc-300 font-medium">{v}</span>
+                            </div>
+                            <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                              <div className={`${w} h-full bg-primary rounded-full`} />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-[0.6rem] font-bold text-zinc-500 uppercase tracking-widest mb-3">Deployment</div>
+                      <div className="rounded-md border border-white/5 bg-white/5 p-2.5 space-y-2">
+                        <div className="flex justify-between text-[0.65rem]">
+                          <span className="text-zinc-500">Region</span>
+                          <span className="text-zinc-300">Global-Edge</span>
                         </div>
-                        <div className="h-1.5 rounded-full bg-white/10">
-                          <div className={`${width as string} h-full rounded-full bg-primary`} />
+                        <div className="flex justify-between text-[0.65rem]">
+                          <span className="text-zinc-500">Status</span>
+                          <span className="text-green-400 font-bold">Active</span>
                         </div>
                       </div>
-                    ))}
+                    </div>
                   </div>
-                </aside>
+                </div>
               </div>
             </div>
           </div>
         </section>
+
+        {/* Features Compact */}
+        <section className="border-t border-white/5 bg-white/[0.01] py-20">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="grid gap-12 lg:grid-cols-3">
+              {[
+                {
+                  title: "Security-First",
+                  desc: "API keys stay on the server. Zero client-side leakage.",
+                  icon: ShieldCheck,
+                },
+                {
+                  title: "Edge Delivery",
+                  desc: "Streaming responses from the closest NVIDIA region.",
+                  icon: Zap,
+                },
+                {
+                  title: "Universal API",
+                  desc: "One interface for chat, vision, and image models.",
+                  icon: LayoutDashboard,
+                },
+              ].map((f, i) => (
+                <div key={i} className="flex gap-4">
+                  <div className="size-10 shrink-0 rounded-lg bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+                    <f.icon className="size-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-white mb-1">{f.title}</h3>
+                    <p className="text-xs leading-relaxed text-muted-foreground">{f.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Compact */}
+        <section className="mx-auto max-w-7xl px-6 py-24">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-emerald-400 p-12 text-center shadow-xl">
+            <div className="relative z-10">
+              <h2 className="text-3xl font-extrabold text-black mb-4">Start building today.</h2>
+              <p className="text-black/70 font-medium mb-8 max-w-lg mx-auto">
+                Join thousands of developers building the next generation of AI applications.
+              </p>
+              <Link
+                href="/app/chat"
+                className="inline-flex h-12 items-center justify-center rounded-lg bg-black px-8 text-sm font-bold text-white transition-all hover:scale-105 active:scale-95"
+              >
+                Get Started Free
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
+
+      <footer className="border-t border-white/5 bg-background/50 py-8">
+        <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-2">
+            <div className="size-6 rounded bg-primary flex items-center justify-center text-primary-foreground text-[0.6rem] font-bold">AC</div>
+            <span className="text-xs font-bold text-white">AI Cortexo</span>
+          </div>
+          <div className="flex gap-8 text-[0.7rem] font-medium text-muted-foreground">
+            <Link href="#" className="hover:text-white transition-colors">Privacy</Link>
+            <Link href="#" className="hover:text-white transition-colors">Terms</Link>
+            <Link href="#" className="hover:text-white transition-colors">Github</Link>
+            <Link href="#" className="hover:text-white transition-colors">Status</Link>
+          </div>
+          <p className="text-[0.7rem] text-muted-foreground">
+            © 2026 NVIDIA Studio.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

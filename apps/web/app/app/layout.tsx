@@ -11,7 +11,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               <Sparkles className="size-5" />
             </span>
             <span>
-              <span className="block text-sm font-semibold tracking-tight">NVIDIA LLM Studio</span>
+              <span className="block text-sm font-semibold tracking-tight">AI Cortexo</span>
               <span className="block text-[0.7rem] text-muted-foreground">Model workspace</span>
             </span>
           </Link>

@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NVIDIA LLM Studio",
+  title: "AI Cortexo",
   description: "Chat and image generation UI powered by NVIDIA APIs.",
 };
 
